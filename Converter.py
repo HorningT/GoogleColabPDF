@@ -1,13 +1,18 @@
-
 ################################################################################
 #                    CODE TO CONVERT COLAB NOTEBOOK TO PDF                     #
 #This code converts an .ipynb file to a Tex based PDF and saves it in the Colab#
 #Notebook folder with the same filename.pdf                                    #
 ################################################################################
-# Function List PDFconvertGC(str(file location))
+# Function List 
 ################################################################################
 
 #Converter for .ipynb conversion to PDF. Input is a string of the file name
+
+def find(name, path):
+    import os
+    for root, dirs, files in os.walk(path):
+        if name in files:
+            return os.path.join(root, name)
 def PDFconvertGC(filename):
     # Imports
     from google.colab import drive; from datetime import datetime; import sys; 
@@ -37,9 +42,8 @@ def PDFconvertGC(filename):
     # Handle Common Errors
     try:
         print('\nFinding file. This may take a minute or two depending on the size of your drive...')
-        os.system("IFS=$'\n'") #Sets the reader to only break at newlines instead of spaces, tabs,and newlines
-        loc = os.path.abspath(filename)
-        
+        os.system("IFS=$'\n'") #Sets the reader to only break at newlines instead of spaces, tabs,and newline
+        loc = find(filename, '/content/gdrive')
     except IndexError as error:
         print(color.BOLD,color.FAIL, "\nCould not find file in your Drive!\n" 
             ,color.END,color.WARNING
@@ -64,7 +68,9 @@ def PDFconvertGC(filename):
    # Autosave file
     os.system('sleep 30s')
    # Convert the file
-    os.system('jupyter nbconvert --to pdf "{fileloc}" --log-level ERROR')
+    ConvCmd =  'jupyter nbconvert --to pdf '+str(loc) +' --log-level ERROR'
+    print(ConvCmd)
+    os.system(ConvCmd)
     # The PDF will be in the same folder as the original file
     print(color.GREEN,"Conversion Complete!\nGreat Job and Have a Wonderful Day!"
             ,color.END,"\U0001F30C")
@@ -91,5 +97,3 @@ def Watermark(filename):
     print(color.BOLD,color.BLUE, str(filename),'\U0001F512\n',color.END)
     print(color.BOLD,color.BLUE,now.strftime("%d/%m/%Y %H:%M:%S")," "
             ,str(random.randrange(1000000, 9999999, 1)),color.END,'\n')
-
-
