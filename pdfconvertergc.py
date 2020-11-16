@@ -113,9 +113,6 @@ def Watermark(filename):
   print(color.BOLD,color.BLUE,now.strftime("%d/%m/%Y %H:%M:%S")," "
       ,str(random.randrange(1000000, 9999999, 1)),color.END,'\n')
 
-filename = 'PDFconverterGC.ipynb' # Ex. 'Coding_Packet.ipynb'
-Watermark(filename)
-PDFconvertGC(filename)
 
 ############ Version Control:
 # Last Update: 2020-10-18, 1459 - V 1.4.1 - Thomas Horning
@@ -132,8 +129,6 @@ PDFconvertGC(filename)
    - ![something]{something}
 
 ###Developer Notes
-
- - Locate Command would be WAY faster given how restricted our search is, I have not been able to get it to work or install the right dependencies.
  - There are many redundant installs in the beginning. This is because it works, and I am scared to touch it
- - I run into Excessive search time issues on a 65 Gb Drive. I found the time is cut if you run the installs in a seperate code cell First. Then run the search
+ - I run into Excessive search time issues on a 65 Gb Drive. 
 """
