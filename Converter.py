@@ -53,7 +53,6 @@ def PDFconvertGC(filename):
     os.system("IFS=$'\n'") #Sets the reader to only break at newlines instead of spaces, tabs,and newline
     try:
       loc = find(filename, '/content/gdrive')
-      print(loc)
       if str(loc) == "None":
           print(color.BOLD,color.FAIL, "\nCould not find file in your Drive!\n" 
               ,color.END,color.WARNING
