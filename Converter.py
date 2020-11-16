@@ -11,7 +11,15 @@
 def PDFconvertGC(filename):
     # Imports
     from google.colab import drive; from datetime import datetime; import sys; 
-    import os; import time
+    import os; import time;
+    class color:
+        BLUE = '\033[94m';
+        GREEN = '\033[92m';
+        BOLD = '\033[1m';
+        UNDERLINE = '\033[4m';
+        END = '\033[0m';
+        FAIL = '\033[91m';
+        WARNING = '\033[93m';
     # Mount Drive First to give time for mounting to process
     drive.mount('/content/gdrive', force_remount = True) 
     # Install some dependences into the RUNTIME (is not local, needs to reinstall 
