@@ -11,7 +11,7 @@
 def PDFconvertGC(filename):
     # Imports
     from google.colab import drive; from datetime import datetime; import sys; 
-    import os; import random; import time
+    import os; import time
 
     # Mount Drive First to give time for mounting to process
     drive.mount('/content/gdrive', force_remount = True) 
@@ -76,7 +76,7 @@ def PDFconvertGC(filename):
     print("Total Time: ",m," m  ",s," s")
     
 def Watermark(filename):
-    from datetime import datetime;
+    from datetime import datetime; import random;
     # To make Watermark distinctive
     class color:
         BLUE = '\033[94m';
