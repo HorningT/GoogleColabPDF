@@ -10,9 +10,18 @@
 
 def find(name, path):
     import os
+    class color:
+        BLUE = '\033[94m';
+        GREEN = '\033[92m';
+        BOLD = '\033[1m';
+        UNDERLINE = '\033[4m';
+        END = '\033[0m';
+        FAIL = '\033[91m';
+        WARNING = '\033[93m';
     for root, dirs, files in os.walk(path):
-        if name in files:
-            return os.path.join(root, name)
+      if name in files:
+        return os.path.join(root, name)
+
 def PDFconvertGC(filename):
     # Imports
     from google.colab import drive; from datetime import datetime; import sys; 
@@ -40,22 +49,24 @@ def PDFconvertGC(filename):
     # location (This accounts for Wildcards and Spaces in the directory names).
     # Uses jupyter and nbconvert to convert to a Tex file, then into a pdf 
     # Handle Common Errors
+    print('\nFinding file. This may take a minute or two depending on the size of your drive...')
+    os.system("IFS=$'\n'") #Sets the reader to only break at newlines instead of spaces, tabs,and newline
     try:
-        print('\nFinding file. This may take a minute or two depending on the size of your drive...')
-        os.system("IFS=$'\n'") #Sets the reader to only break at newlines instead of spaces, tabs,and newline
-        loc = find(filename, '/content/gdrive')
-    except IndexError as error:
-        print(color.BOLD,color.FAIL, "\nCould not find file in your Drive!\n" 
-            ,color.END,color.WARNING
-            ,"- Make sure you input the correct filename\n"
-            ,"  - Make sure the file is saved in the google drive you mounted\n\n"
-            ,color.END)
-        Er = str('Error: {}. {}, line: {}'.format(sys.exc_info()[0],sys.exc_info()[1]
-                                        ,sys.exc_info()[2].tb_lineno))
-        f = open("ErrorLog.txt","a+"); f.write(Er); f.close()
-        sys.tracebacklimit=0
-        sys.exit("Please Try Again")
-        
+      loc = find(filename, '/content/gdrive')
+      print(loc)
+      if str(loc) == "None":
+          print(color.BOLD,color.FAIL, "\nCould not find file in your Drive!\n" 
+              ,color.END,color.WARNING
+              ,"- Make sure you input the correct filename\n"
+              ,"  - Make sure the file is saved in the google drive you mounted\n\n"
+              ,color.END)
+          Er = str('Error: {}. {}, line: {}'.format(sys.exc_info()[0],sys.exc_info()[1]
+                                                  ,sys.exc_info()[2].tb_lineno))
+          f = open("ErrorLog.txt","a+"); f.write(Er); f.close()
+          sys.tracebacklimit=0
+          sys.exit("Please Try Again")
+      else:
+        print('File Found at: ',str(loc))   
     except Exception as exception:
         print(color.BOLD,color.WARNING, "Exception Occured, Please Check Log",color.END)
         Er = str('Error: {}. {}, line: {}'.format(sys.exc_info()[0],sys.exc_info()[1]
@@ -63,13 +74,10 @@ def PDFconvertGC(filename):
         f = open("ErrorLog.txt","a+");f.write(Er);f.close()
         sys.tracebacklimit=0
         sys.exit("Please Try Again")
-        
-    print('File Found at: ',str(loc))
    # Autosave file
     os.system('sleep 30s')
    # Convert the file
     ConvCmd =  'jupyter nbconvert --to pdf '+str(loc) +' --log-level ERROR'
-    print(ConvCmd)
     os.system(ConvCmd)
     # The PDF will be in the same folder as the original file
     print(color.GREEN,"Conversion Complete!\nGreat Job and Have a Wonderful Day!"
@@ -93,7 +101,7 @@ def Watermark(filename):
 
      # Make Watermark
     now = datetime.now()
-    print(color.UNDERLINE,'Unique Watermark\n',color.END)
-    print(color.BOLD,color.BLUE, str(filename),'\U0001F512\n',color.END)
+    print(color.UNDERLINE,'Unique Watermark',color.END)
+    print(color.BOLD,color.BLUE, str(filename),'\U0001F512',color.END)
     print(color.BOLD,color.BLUE,now.strftime("%d/%m/%Y %H:%M:%S")," "
             ,str(random.randrange(1000000, 9999999, 1)),color.END,'\n')
