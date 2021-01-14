@@ -44,7 +44,8 @@ def PDFconvertGC(filename):
     os.system('pip install pandoc >> outputsuppressed.txt')
     os.system('install nbconvert >> outputsuppressed.txt')
     os.system('pip install jupyter >> outputsuppressed.txt')
-    os.system('apt-get install texlive-xetex texlive-fonts-recommended texlive-generic-recommended >> outputsuppressed.txt')
+    os.system('apt-get install texlive-xetex texlive-fonts-recommended texlive-generic-recommended --fix-missing >> outputsuppressed.txt')
+    os.system('apt-get update >> outputsuppressed.txt')
     # Searches the Google drive directory for the filename and gives back it's 
     # location (This accounts for Wildcards and Spaces in the directory names).
     # Uses jupyter and nbconvert to convert to a Tex file, then into a pdf 
@@ -76,10 +77,10 @@ def PDFconvertGC(filename):
    # Autosave file
     os.system('sleep 30s')
    # Convert the file
-    ConvCmd =  'jupyter nbconvert --to pdf '+str(loc) +' --log-level ERROR'
+    ConvCmd =  'jupyter nbconvert --output-dir='./content/' --to pdf '+str(loc) +' --log-level ERROR'
     os.system(ConvCmd)
     # The PDF will be in the same folder as the original file
-    print(color.GREEN,"Conversion Complete!\nGreat Job and Have a Wonderful Day!"
+    print(color.GREEN,"Conversion Complete!\nThe PDF is in the Contents folder.\nGreat Job and Have a Wonderful Day!"
             ,color.END,"\U0001F30C")
     t4 = time.time(); 
     m = str(int((t4-t1)/60)); 
