@@ -75,9 +75,9 @@ def PDFconvertGC(filename):
         sys.tracebacklimit=0
         sys.exit("Please Try Again")
    # Autosave file
-    !sleep 30s
+    os.system('sleep 30s')
    # Convert the file
-    !jupyter nbconvert --output-dir='./content/' --to pdf {loc} --log-level ERROR
+    os.system('jupyter nbconvert --output-dir='+'./PDFs/'+' --to pdf {loc} --log-level ERROR')
     # The PDF will be in the same folder as the original file
     print(color.GREEN,"Conversion Complete!\nThe PDF is in the Contents folder.\nGreat Job and Have a Wonderful Day!"
             ,color.END,"\U0001F30C")
