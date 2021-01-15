@@ -42,10 +42,10 @@ def PDFconvertGC(filename):
     os.system('pip install IPython >> outputsuppressed.txt')
     os.system('pip install Latex >> outputsuppressed.txt')
     os.system('pip install pandoc >> outputsuppressed.txt')
-    os.system('install nbconvert >> outputsuppressed.txt')
+    os.system('sudo install nbconvert >> outputsuppressed.txt')
     os.system('pip install jupyter >> outputsuppressed.txt')
-    os.system('apt-get install texlive-xetex texlive-fonts-recommended texlive-generic-recommended --fix-missing >> outputsuppressed.txt')
-    os.system('apt-get update >> outputsuppressed.txt')
+    os.system('sudo apt-get install texlive-xetex texlive-fonts-recommended texlive-generic-recommended --fix-missing >> outputsuppressed.txt')
+    os.system('sudo apt-get update >> outputsuppressed.txt')
     # Searches the Google drive directory for the filename and gives back it's 
     # location (This accounts for Wildcards and Spaces in the directory names).
     # Uses jupyter and nbconvert to convert to a Tex file, then into a pdf 
@@ -53,7 +53,7 @@ def PDFconvertGC(filename):
     print('\nFinding file. This may take a minute or two depending on the size of your drive...')
     os.system("IFS=$'\n'") #Sets the reader to only break at newlines instead of spaces, tabs,and newline
     try:
-      loc = find(filename, '/content/gdrive')
+      loc = find(filename, '/content')
       if str(loc) == "None":
           print(color.BOLD,color.FAIL, "\nCould not find file in your Drive!\n" 
               ,color.END,color.WARNING
