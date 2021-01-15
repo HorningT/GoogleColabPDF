@@ -23,7 +23,7 @@ def find(name, path):
         return os.path.join(root, name)
 
 def PDFconvertGC(filename):
-   # Imports
+    # Imports
   from google.colab import drive; from datetime import datetime; import sys; 
   import os; import time; import subprocess
   class color:
@@ -39,11 +39,12 @@ def PDFconvertGC(filename):
     # Install some dependences into the RUNTIME (is not local, needs to reinstall 
     # every Factory runtime)
   t1 = time.time()
-  subprocess.call('pip install IPython >> outputsuppressed.txt', shell= True)
-  subprocess.call('pip install Latex >> outputsuppressed.txt', shell= True)
-  subprocess.call('pip install pandoc >> outputsuppressed.txt', shell= True)
-  subprocess.call('install nbconvert >> outputsuppressed.txt', shell= True)
-  subprocess.call('pip install jupyter >> outputsuppressed.txt', shell= True)
+  subprocess.call('sudo apt-get IPython >> outputsuppressed.txt', shell= True)
+  subprocess.call('sudo apt-get install jupyter >> outputsuppressed.txt', shell= True)
+  subprocess.call('sudo apt-get Latex >> outputsuppressed.txt', shell= True)
+  subprocess.call('sudo apt-get pandoc >> outputsuppressed.txt', shell= True)
+  subprocess.call('sudo apt-get install nbconvert >> outputsuppressed.txt', shell= True)
+  subprocess.call('apt-get update >> outputsuppressed.txt', shell= True)
   subprocess.call('sudo apt-get install texlive-xetex texlive-fonts-recommended texlive-generic-recommended --fix-missing >> outputsuppressed.txt', shell= True)
   subprocess.call('apt-get update >> outputsuppressed.txt', shell= True)
   # Searches the Google drive directory for the filename and gives back it's 
@@ -78,7 +79,7 @@ def PDFconvertGC(filename):
   subprocess.call('sleep 30s', shell = True)
    # Convert the file
   try:
-    CMD = 'sudo jupyter nbconvert --output-dir=' + './' + ' --to pdf "' + str(loc) + '"'
+    CMD = 'sudo jupyter nbconvert --output-dir='+'./'+' --to pdf "'+str(loc)+'"'
     #print(CMD)
     #!jupyter nbconvert --output-dir='./content/' --to pdf {loc} --log-level ERROR
     subprocess.call(CMD, shell = True)
@@ -115,4 +116,3 @@ def Watermark(filename):
   print(color.BOLD,color.BLUE, str(filename),'\U0001F512',color.END)
   print(color.BOLD,color.BLUE,now.strftime("%d/%m/%Y %H:%M:%S")," "
             ,str(random.randrange(1000000, 9999999, 1)),color.END,'\n')
-
