@@ -78,8 +78,8 @@ def PDFconvertGC(filename):
   subprocess.call('sleep 30s', shell = True)
    # Convert the file
   try:
-    CMD = 'sudo jupyter nbconvert --output-dir='+'./PDF'+' --to pdf "'+str(loc)+'"'
-    print(CMD)
+    CMD = 'sudo jupyter nbconvert --output-dir=' + './' + ' --to pdf "' + str(loc) + '"'
+    #print(CMD)
     #!jupyter nbconvert --output-dir='./content/' --to pdf {loc} --log-level ERROR
     subprocess.call(CMD, shell = True)
   except Exception as exception:
